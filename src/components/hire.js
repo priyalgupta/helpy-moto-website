@@ -13,12 +13,6 @@ const Hire = () => {
   }));
   const [error, setError] = useState(() => ({}));
 
-  const [data, setData] = useState(initialData);
-  const [isValidName, setIsValidName] = useState(false);
-  const [isValidType, setIsValidType] = useState(false);
-  const [isValidProblem, setIsValidProblem] = useState(false);
-  const [isValidLocation, setIsValidLocation] = useState(false);
-
   const firstUpdate = useRef(true);
   const navigate = useNavigate();
   useEffect(() => {
@@ -124,13 +118,7 @@ const Hire = () => {
             <Form.Control
               type="text"
               className="hire_form_control"
-              onChange={e => {
-                const nameRegex = /^[a-zA-Z]+$/;
-                setIsValidName(nameRegex.test(e.target.value));
-                setData({ name: e.target.value, type: type })
-                onChangeHandler("name", e.target.value)
-              }} 
-              //onChange={(e) => onChangeHandler("name", e.target.value)}
+              onChange={(e) => onChangeHandler("name", e.target.value)}
             />
             {error?.name ? <p className="error">{error.name}</p> : null}
           </Form.Group>
@@ -143,13 +131,7 @@ const Hire = () => {
             <Form.Control
               type="text"
               className="hire_form_control"
-              onChange={e => {
-                const typeRegex = /^[a-zA-Z0-9]+$/;
-                setIsValidType(typeRegex.test(e.target.value));
-                setData({ names: names, type: e.target.value, problem: problem })
-                onChangeHandler("type", e.target.value)
-              }} 
-              //onChange={(e) => onChangeHandler("type", e.target.value)}
+              onChange={(e) => onChangeHandler("type", e.target.value)}
             />
             {error?.type ? <p className="error">{error.type}</p> : null}
           </Form.Group>
@@ -162,13 +144,7 @@ const Hire = () => {
             <Form.Control
               type="text"
               className="hire_form_control"
-              onChange={e => {
-                const problemRegex = /^[a-zA-Z0-9]+$/;
-                setIsValidProblem(problemRegex.test(e.target.value));
-                setData({ type: type, problem: e.target.value, location: location })
-                onChangeHandler("problem", e.target.value)
-              }} 
-              //onChange={(e) => onChangeHandler("problem", e.target.value)}
+              onChange={(e) => onChangeHandler("problem", e.target.value)}
             />
             {error?.problem ? <p className="error">{error.problem}</p> : null}
           </Form.Group>
@@ -180,13 +156,7 @@ const Hire = () => {
             <Form.Control
               type="text"
               className="hire_form_control"
-              onChange={e => {
-                const locationRegex = /^[a-zA-Z0-9]+$/;
-                setIsValidLocation(locationRegex.test(e.target.value));
-                setData({ problem: problem, location: e.target.value})
-                onChangeHandler("location", e.target.value)
-              }} 
-              //onChange={(e) => onChangeHandler("location", e.target.value)}
+              onChange={(e) => onChangeHandler("location", e.target.value)}
             />
             {error?.location ? <p className="error">{error.location}</p> : null}
           </Form.Group>
