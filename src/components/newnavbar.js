@@ -5,6 +5,8 @@ import Logo from "../assets/Logo.png";
 import MobileImage from "../assets/bg4.jpg";
 import { Link } from "react-router-dom";
 
+const initialData = { location: "", vtype: "" , vmodel: "" , vnumber: "" , issue: "" , address: "" }
+
 const Navbar = () => {
   const [showForm, setShowForm] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -12,12 +14,16 @@ const Navbar = () => {
   const [data, setData] = useState(initialData);
   const [location, setlocation] = useState('');
   const [isValidLocation, setIsValidLocation] = useState(false);
+  const [vtype, setvtype] = useState('');
+  const [isValidVtype, setIsValidVtype] = useState(false);
   const [vmodel, setvmodel] = useState('');
   const [isValidVmodel, setIsValidVmodel] = useState(false);
   const [vnumber, setvnumber] = useState('');
   const [isValidVnumber, setIsValidVnumber] = useState(false);
   const [issue, setissue] = useState('');
   const [isValidIssue, setIsValidIssue] = useState(false);
+  const [address, setaddress] = useState('');
+  const [isValidAddress, setIsValidAddress] = useState(false);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => setShowForm(true), 5000);
@@ -145,16 +151,25 @@ const Navbar = () => {
                     setlocation(e.target.value)
                     const locationRegex = /^[a-zA-Z0-9]+$/;
                     setIsValidLocation(locationRegex.test(e.target.value));
-                    setData({ location: e.target.value, vmodel: vmodel })
+                    setData({ location: e.target.value, vtype: vtype, vmodel: vmodel, vnumber: vnumber, issue: issue, address: address })
                   }} required="required" />
                   <span className="user-navbar">Location</span>
+                </div>
+                <div className="inputBox1-navbar">
+                  <input type="text" value={vtype} onChange={e => {
+                    setvtype(e.target.value)
+                    const vtypeRegex = /^[a-zA-Z0-9]+$/;
+                    setIsValidVtype(vtypeRegex.test(e.target.value));
+                    setData({ location: location, vtype: e.target.value, vmodel: vmodel, vnumber: vnumber, issue: issue, address: address })
+                  }} required="required" />
+                  <span className="user-navbar">Vehicle Type</span>
                 </div>
                 <div className="inputBox1-navbar">
                   <input type="text" value={vmodel} onChange={e => {
                     setvmodel(e.target.value)
                     const vmodelRegex = /^[a-zA-Z0-9]+$/;
                     setIsValidVmodel(vmodelRegex.test(e.target.value));
-                    setData({ location: location, vmodel: e.target.value, vnumber: vnumber })
+                    setData({ location: location, vtype: vtype, vmodel: e.target.value, vnumber: vnumber, issue: issue, address: address })
                   }} required="required" />
                   <span className="user-navbar">Vehicle Model</span>
                 </div>
@@ -163,7 +178,7 @@ const Navbar = () => {
                     setvnumber(e.target.value)
                     const vnumberRegex = /^[a-zA-Z0-9]+$/;
                     setIsValidVnumber(vnumberRegex.test(e.target.value));
-                    setData({ vmodel: vmodel, vnumber: e.target.value, issue: issue })
+                    setData({ location: location, vtype: vtype, vmodel: vmodel, vnumber: e.target.value, issue: issue, address: address })
                   }} required="required" />
                   <span className="user-navbar">Vehicle Number</span>
                 </div>
@@ -172,12 +187,22 @@ const Navbar = () => {
                     setissue(e.target.value)
                     const issueRegex = /^[a-zA-Z0-9]+$/;
                     setIsValidIssue(issueRegex.test(e.target.value));
-                    setData({ vnumber: vnumber, issue: e.target.value })
+                    setData({ location: location, vtype: vtype, vmodel: vmodel, vnumber: vnumber, issue: e.target.value, address: address })
                   }} required="required" />
                   <span className="user-navbar">Issue</span>
                 </div>
+                <div className="inputBox1-navbar">
+                  <input type="text" value={address} onChange={e => {
+                    setaddress(e.target.value)
+                    const addressRegex = /^[a-zA-Z0-9]+$/;
+                    setIsValidAddress(addressRegex.test(e.target.value));
+                    setData({ location: location, vtype: vtype, vmodel: vmodel, vnumber: vnumber, issue: issue, address: e.target.value })
+                  }} required="required" />
+                  <span className="user-navbar">Address</span>
+                </div>
 
-                <button className="enter">Hire Now</button>
+                <Link to="/mechanic_list"><button className="enter" >Hire Now</button></Link>
+
               </div>
             </form>
           </div>
@@ -208,16 +233,25 @@ const Navbar = () => {
                       setlocation(e.target.value)
                       const locationRegex = /^[a-zA-Z0-9]+$/;
                       setIsValidLocation(locationRegex.test(e.target.value));
-                      setData({ location: e.target.value, vmodel: vmodel })
+                      setData({ location: e.target.value, vtype: vtype, vmodel: vmodel, vnumber: vnumber, issue: issue, address: address })
                     }} required="required" />
                     <span className="user-navbar">Location</span>
+                  </div>
+                  <div className="inputBox1-navbar">
+                    <input type="text" value={vtype} onChange={e => {
+                      setvtype(e.target.value)
+                      const vtypeRegex = /^[a-zA-Z0-9]+$/;
+                      setIsValidVtype(vtypeRegex.test(e.target.value));
+                      setData({ location: location, vtype: e.target.value, vmodel: vmodel, vnumber: vnumber, issue: issue, address: address })
+                    }} required="required" />
+                    <span className="user-navbar">Vehicle Type</span>
                   </div>
                   <div className="inputBox-navbar">
                     <input type="text" value={vmodel} onChange={e => {
                       setvmodel(e.target.value)
                       const vmodelRegex = /^[a-zA-Z0-9]+$/;
                       setIsValidVmodel(vmodelRegex.test(e.target.value));
-                      setData({ location: location, vmodel: e.target.value, vnumber: vnumber })
+                      setData({ location: location, vtype: vtype, vmodel: e.target.value, vnumber: vnumber, issue: issue, address: address })
                     }} required="required" />
                     <span>Vehicle Model</span>
                   </div>
@@ -226,7 +260,7 @@ const Navbar = () => {
                       setvnumber(e.target.value)
                       const vnumberRegex = /^[a-zA-Z0-9]+$/;
                       setIsValidVnumber(vnumberRegex.test(e.target.value));
-                      setData({ vmodel: vmodel, vnumber: e.target.value, issue: issue })
+                      setData({ location: location, vtype: vtype, vmodel: vmodel, vnumber: e.target.value, issue: issue, address: address })
                     }} required="required" />
                     <span className="user-navbar">Vehicle Number</span>
                   </div>
@@ -235,12 +269,22 @@ const Navbar = () => {
                       setissue(e.target.value)
                       const issueRegex = /^[a-zA-Z0-9]+$/;
                       setIsValidIssue(issueRegex.test(e.target.value));
-                      setData({ vnumber: vnumber, issue: e.target.value })
+                      setData({ location: location, vtype: vtype, vmodel: vmodel, vnumber: vnumber, issue: e.target.value, address: address })
                     }} required="required" />
                     <span>Issue</span>
                   </div>
+                  <div className="inputBox1-navbar">
+                    <input type="text" value={address} onChange={e => {
+                      setaddress(e.target.value)
+                      const addressRegex = /^[a-zA-Z0-9]+$/;
+                      setIsValidAddress(addressRegex.test(e.target.value));
+                      setData({ location: location, vtype: vtype, vmodel: vmodel, vnumber: vnumber, issue: issue, address: e.target.value })
+                    }} required="required" />
+                    <span className="user-navbar">Address</span>
+                  </div>
 
-                  <button className="enter">Hire Now</button>
+                  <Link to="/mechanic_list"><button className="enter" >Hire Now</button></Link>
+                  
                 </div>
               </form>
             </div>
